@@ -25,7 +25,7 @@ class Problem2 {
         }
 
         fun part2() {
-            val input = readInput("/Users/jxd040/dev/advent-of-code-2023/src/main/resources/problem-2/test-input.txt")
+            val input = readInput("/Users/jxd040/dev/advent-of-code-2023/src/main/resources/problem-2/input.txt")
             val games = input.groupBy(
                 { game -> game.split(":")[0].substring(5) },
                 { game ->
@@ -40,7 +40,11 @@ class Problem2 {
                 getGameMaximums(game.value)
             }
 
+            val powers = requiredMaximums.map { it.value.red * it.value.green * it.value.blue }
+            val result = powers.sum()
             println(requiredMaximums)
+            println(powers)
+            println(result)
         }
 
         private fun getGameMaximums(reveals: List<List<String>>): GameMaximums {
@@ -55,11 +59,11 @@ class Problem2 {
                             gameMaximums.red = number
                         }
 
-                        "green" -> if (number > gameMaximums.red) {
+                        "green" -> if (number > gameMaximums.green) {
                             gameMaximums.green = number
                         }
 
-                        "blue" -> if (number > gameMaximums.red) {
+                        "blue" -> if (number > gameMaximums.blue) {
                             gameMaximums.blue = number
                         }
                     }
